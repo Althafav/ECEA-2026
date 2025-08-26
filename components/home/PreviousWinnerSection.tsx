@@ -73,7 +73,7 @@ function WinnerCard({ w }: { w: WinnerItem }) {
   const pos = Number(w?.position?.value);
 
   return (
-    <article className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
+    <article className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all hover:ring-2 hover:ring-primary-3">
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-50">
         {img ? (
           <Image

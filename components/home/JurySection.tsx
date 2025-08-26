@@ -31,7 +31,7 @@ export default function JurySection({ pageData }: Props) {
             return (
               <article
                 key={item?.id ?? idx}
-                className="group relative overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 shadow-sm transition hover:shadow-lg"
+                className="group relative hover:ring-2 hover:ring-primary-3 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200 shadow-sm transition hover:shadow-lg"
               >
                 <div className="relative">
                   <div className="aspect-[4/5] w-full overflow-hidden">

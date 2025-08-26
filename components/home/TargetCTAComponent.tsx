@@ -15,7 +15,7 @@ export default function TargetCTAComponent({ pageData }: Props) {
 
   return (
     <section aria-labelledby="target-cta-heading" className="">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <h2
           id="target-cta-heading"
           className="text-center font-medium tracking-tight text-slate-900

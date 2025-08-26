@@ -14,7 +14,7 @@ import PreviousWinnerSection from "@/components/home/PreviousWinnerSection";
 import JurySection from "@/components/home/JurySection";
 import SponsorSection from "@/components/home/SponsorSection";
 import FAQSection from "@/components/home/FAQSection";
-
+import Link from "next/link";
 
 type PageProps = {
   pageData: Homepage2026 | null;
@@ -67,6 +67,46 @@ export default function Home({ pageData }: PageProps) {
             duration={0.4}
             stagger={0.02}
           />
+
+          <div>
+            {pageData.aboutctabuttonlink.value && (
+              <div className="overflow-hidden mt-6">
+                <Link
+                  className="cta inline-block rounded-full hover:bg-black px-5 py-3 text-white backdrop-blur-md  bg-primary-3 transition"
+                  href={pageData.aboutctabuttonlink.value}
+                >
+                  {pageData.aboutctabuttonname.value}
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <div
+            className="mt-20 rounded-3xl overflow-hidden"
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+              position: "relative",
+              paddingBottom: "56.25%",
+            }}
+          >
+            <iframe
+              title="YouTube Video"
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/2Cvl6saWy-A?si=FLGo3BAecG3sAy7e"
+              frameBorder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                top: "0",
+                left: "0",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
         </div>
 
         <div className="py-20">

@@ -4,7 +4,8 @@ import { useGSAP } from "@gsap/react";
 
 import { ScrollSmoother } from "gsap/dist/ScrollSmoother";
 import MenuComponent from "./Menu/MenuComponent";
-import FooterComponent from "./Menu/FooterComponent";
+import FooterComponent from "./FooterComponent";
+import BackgroundFX from "../common/BackgroundFX";
 
 export default function LayoutComponent({ children }: any) {
   const main = useRef<HTMLDivElement>(null);
@@ -24,10 +25,11 @@ export default function LayoutComponent({ children }: any) {
   return (
     <div>
       <MenuComponent />
+      <BackgroundFX />
       <div id="smooth-wrapper" className="flex flex-col" ref={main}>
         <div id="smooth-content">
           <div className="flex-1 min-h-screen mt-[94px]">{children}</div>
-          <FooterComponent />   
+          <FooterComponent />
         </div>
       </div>
     </div>

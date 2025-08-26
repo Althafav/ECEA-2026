@@ -10,7 +10,7 @@ import { ScrollSmoother } from "gsap/dist/ScrollSmoother";
 
 import MenuComponent from "@/components/Layout/Menu/MenuComponent";
 import BackgroundFX from "@/components/common/BackgroundFX";
-import FooterComponent from "@/components/Layout/Menu/FooterComponent";
+import FooterComponent from "@/components/Layout/FooterComponent";
 
 export default function ClientShell({
   children,

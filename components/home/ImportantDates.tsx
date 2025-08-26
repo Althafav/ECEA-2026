@@ -2,7 +2,6 @@
 "use client";
 
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 type Props = {
@@ -11,9 +10,7 @@ type Props = {
 
 export default function ImportantDates({ pageData }: Props) {
   useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.from(".timeline-item", {
+    gsap.from(".timeline-item ", {
       opacity: 0,
       y: 80,
       duration: 0.8,
@@ -34,7 +31,7 @@ export default function ImportantDates({ pageData }: Props) {
       <div className="mx-auto max-w-4xl ">
         <h2
           id="important-dates-heading"
-          className="text-center text-3xl font-bold tracking-tight text-slate-900 md:text-4xl"
+          className="text-center text-3xl font-bold tracking-tight text-slate-900 md:text-4xl heading"
         >
           {pageData.importantdateheading.value}
         </h2>
@@ -56,7 +53,7 @@ export default function ImportantDates({ pageData }: Props) {
                     <div className="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-white border-4 border-primary-3 shadow-md z-10" />
 
                     <div
-                      className={`w-5/12 p-6 bg-white rounded-2xl shadow-lg border border-slate-200 relative z-20 ${
+                      className={`w-5/12 p-6 bg-white rounded-2xl shadow-md border border-slate-200 relative z-20 hover:ring-2 hover:ring-primary-3 ${
                         isLeft ? "text-right" : "text-left"
                       }`}
                     >

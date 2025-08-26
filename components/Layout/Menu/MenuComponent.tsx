@@ -3,6 +3,7 @@
 import { Globalcomponent } from "@/models/globalcomponent";
 import Globals from "@/modules/Globals";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import {
   FaFacebook,
@@ -18,6 +19,7 @@ export default function MenuComponent() {
   const [pageData, setPageData] = useState<Globalcomponent | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState<number | null>(null);
+  const { asPath, locale, push, locales } = useRouter();
 
   useEffect(() => {
     let mounted = true;
@@ -57,11 +59,13 @@ export default function MenuComponent() {
               />
             </Link>
             <div className="h-6 w-px bg-gray-300" />
-            <img
-              src={pageData?.selogo?.value?.[0]?.url}
-              alt="Society"
-              className="w-[140px] md:w-[180px]"
-            />
+            <Link href={pageData.sewebsitelink.value}>
+              <img
+                src={pageData?.selogo?.value?.[0]?.url}
+                alt="Society"
+                className="w-[140px] md:w-[180px]"
+              />
+            </Link>
           </div>
 
           {/* Trigger */}
@@ -93,13 +97,6 @@ export default function MenuComponent() {
                 className="w-[140px] md:w-[180px]"
               />
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-2 rounded-lg hover:bg-gray-100 focus:outline-none"
-              aria-label="Close menu"
-            >
-              <HiX size={28} />
-            </button>
           </div>
 
           {/* Menu list */}

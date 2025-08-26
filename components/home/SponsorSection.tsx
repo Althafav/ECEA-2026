@@ -23,7 +23,7 @@ export default function SponsorSection({ pageData }: Props) {
               sponsor-card group relative rounded-2xl border border-slate-200
               bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all duration-200
               hover:-translate-y-0.5 hover:shadow-md
-              w-[180px] sm:w-[200px] md:w-[220px]
+              w-[180px] sm:w-[200px] md:w-[220px] hover:ring-2 hover:ring-primary-3
             "
           >
             <div className="flex h-24 items-center justify-center">

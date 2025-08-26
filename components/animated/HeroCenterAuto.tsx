@@ -3,6 +3,7 @@
 
 import { useLayoutEffect, useMemo, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap-setup";
+import Link from "next/link";
 
 type ResponsiveVw = number | { base: number; md?: number; lg?: number };
 
@@ -190,12 +191,12 @@ export default function HeroCenterAuto({
             ))}
             {ctaText && ctaHref && (
               <div className="overflow-hidden mt-6">
-                <a
-                  className="cta inline-block rounded-xl bg-white/10 px-5 py-3 text-white backdrop-blur-md ring-1 ring-white/30 hover:bg-white/20 transition"
+                <Link
+                  className="cta inline-block rounded-full hover:bg-white/10 px-5 py-3 text-white backdrop-blur-md  bg-primary-3 transition"
                   href={ctaHref}
                 >
                   {ctaText}
-                </a>
+                </Link>
               </div>
             )}
           </div>

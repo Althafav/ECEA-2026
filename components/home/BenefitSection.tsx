@@ -162,11 +162,11 @@ function BenefitCard({
   const hasHtml = !!item?.content?.value;
 
   return (
-    <li className="h-full">
+    <li className="h-full ">
       {/* make wrapper fill height */}
-      <div className="h-full rounded-2xl p-[1px] bg-[conic-gradient(at_top_left,_#a5b4fc_0%,_#bfdbfe_20%,_#e2e8f0_40%,_transparent_60%)]">
+      <div className="h-full rounded-2xl p-[1px] bg-[conic-gradient(at_top_left,_#a5b4fc_0%,_#bfdbfe_20%,_#e2e8f0_40%,_transparent_60%)] ">
         {/* card fills height, column layout */}
-        <article className="h-full min-h-[250px] sm:min-h-[260px] flex flex-col rounded-2xl bg-white/80 backdrop-blur-sm shadow-sm ring-1 ring-slate-200 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+        <article className="h-full min-h-[250px] sm:min-h-[260px] flex flex-col rounded-2xl bg-white/80 backdrop-blur-sm shadow-sm ring-1 ring-slate-200 hover:ring-2 hover:ring-primary-3">
           {/* content grows to take available space */}
           <div className="p-6 flex-1">
             <div className="flex items-start flex-col gap-5">
