@@ -1,26 +1,55 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+html {
+    scroll-behavior: smooth;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-primary-1: #855421;
+  --color-primary-2: #8E702A;
+  --color-primary-3: #C89F32;
+
+  --color-primaryDark: #4A3A16;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.container {
+  width: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Small (sm) - default mobile */
+  @media screen and (min-width: 640px) {
+    max-width: 640px;
+  }
+
+  /* Medium (md) */
+  @media screen and (min-width: 768px) {
+    max-width: 768px;
+  }
+
+  /* Large (lg) */
+  @media screen and (min-width: 1024px) {
+    max-width: 1024px;
+  }
+
+  /* Extra Large (xl) */
+  @media screen and (min-width: 1280px) {
+    max-width: 1280px;
+  }
+
+  /* 2XL */
+  @media screen and (min-width: 1400px) {
+    max-width: 1300px;
+  }
+
+  /* 3XL or custom larger breakpoint */
+  @media screen and (min-width: 1536px) {
+    max-width: 1400px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+
+
