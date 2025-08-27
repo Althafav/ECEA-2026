@@ -26,14 +26,14 @@ export default function Home({ pageData }: PageProps) {
     return null;
   }
   return (
-    <main className="">
-      <PopupBanner
+    <main className="w-full">
+      {/* <PopupBanner
         bannerImage={pageData.promobannerimage.value[0].url}
         href={pageData.promobannerlink.value}
         frequency="day" // "session" | "day" | "always"
         openDelay={3000} // ms
         alt=" Excellence and Creative Engineering Award"
-      />
+      /> */}
       <HeroCenterAuto
         videoSrc={pageData.bannervideolink.value}
         poster={pageData.bannerimage.value[0]?.url}

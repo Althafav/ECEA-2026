@@ -79,4 +79,15 @@ p {
 }
 
 
+/* globals.css */
+html, body, #__next {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip; /* or hidden if you prefer */
+}
+*, *::before, *::after { box-sizing: border-box; }
+img, video { max-width: 100%; height: auto; }
+
+
+
 

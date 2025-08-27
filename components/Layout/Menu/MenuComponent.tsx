@@ -69,27 +69,27 @@ export default function MenuComponent() {
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               {/* Logos */}
               <div className="flex items-center gap-3 sm:gap-4 flex-wrap min-w-0">
-                <Link href="/" className="block">
+                <Link href="/" className="">
                   <img
                     src={pageData?.ecealogo?.value?.[0]?.url}
                     alt="ECEA"
-                    className="h-10 sm:h-12 md:h-14 w-auto max-w-[44vw] sm:max-w-none object-contain"
+                    className="h-10 sm:h-12 md:h-14 w-[120px] sm:w-[180px]  sm:max-w-none object-contain"
                   />
                 </Link>
                 <span className="hidden sm:block h-6 w-px bg-gray-300" />
                 {/* Use anchor for external site to avoid Next prefetch */}
-                <a
+                <Link
                   href={pageData?.sewebsitelink?.value}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block"
+                  className=""
                 >
                   <img
                     src={pageData?.selogo?.value?.[0]?.url}
                     alt="Society"
-                    className="h-10 sm:h-12 md:h-14 w-auto max-w-[44vw] sm:max-w-none object-contain"
+                    className="h-10 sm:h-12 md:h-14 w-[120px]  sm:w-[180px]   sm:max-w-none object-contain"
                   />
-                </a>
+                </Link>
               </div>
 
               {/* Actions */}
