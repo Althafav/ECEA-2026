@@ -2,7 +2,7 @@
 
 export default function BackgroundFX() {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
+    <div aria-hidden className="pointer-events-none fixed max-w-full inset-0 -z-10">
       {/* Base gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-slate-100 dark:from-neutral-950 dark:to-neutral-900" />
 

@@ -96,7 +96,7 @@ export default function MenuComponent() {
                     {locale === "en" ? "العربية" : "English"}
                   </button>
                 </div>
-                <div className="flex items-center hover:bg-gray-100 rounded-lg p-2">
+                <div className="flex items-center cursor-pointer hover:bg-gray-100 rounded-lg p-2">
                   <span>Menu</span>
                   <button
                     onClick={() => setIsOpen(true)}
