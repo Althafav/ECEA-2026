@@ -14,6 +14,7 @@ import {
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { HiMenuAlt4, HiX, HiChevronDown } from "react-icons/hi";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 export default function MenuComponent() {
   const [pageData, setPageData] = useState<Globalcomponent | null>(null);
@@ -95,14 +96,14 @@ export default function MenuComponent() {
                     {locale === "en" ? "العربية" : "English"}
                   </button>
                 </div>
-                <div className="flex gap-1 items-center hover:bg-gray-100 rounded-lg p-2">
+                <div className="flex items-center hover:bg-gray-100 rounded-lg p-2">
                   <span>Menu</span>
                   <button
                     onClick={() => setIsOpen(true)}
                     className="  focus:outline-none"
                     aria-label="Open menu"
                   >
-                    <HiMenuAlt4 size={28} />
+                    <IoMdArrowDropdown  size={28} />
                   </button>
                 </div>
               </div>

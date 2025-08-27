@@ -9,10 +9,10 @@ export default function Document() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <body className="antialiased">
-  
         <Main />
         <NextScript />
       </body>
