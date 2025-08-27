@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { HiMenuAlt4, HiX, HiChevronDown } from "react-icons/hi";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 export default function MenuComponent() {
   const [pageData, setPageData] = useState<Globalcomponent | null>(null);
@@ -110,7 +111,7 @@ export default function MenuComponent() {
                   aria-label="Open menu"
                 >
                   <span className="text-sm sm:text-base">Menu</span>
-                  <HiMenuAlt4 size={22} />
+                  <IoMdArrowDropdown size={22} />
                 </button>
               </div>
             </div>

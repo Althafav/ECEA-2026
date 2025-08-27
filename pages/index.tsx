@@ -93,28 +93,17 @@ export default function Home({ pageData }: PageProps) {
             </div>
             <div
               className=" rounded-3xl overflow-hidden"
-              style={{
-                maxWidth: "100%",
-                height: "auto",
-                position: "relative",
-                paddingBottom: "56.25%",
-              }}
+              
             >
               <iframe
                 title="YouTube Video"
                 width="100%"
-                height="100%"
+                height="350px"
                 src="https://www.youtube.com/embed/2Cvl6saWy-A?si=FLGo3BAecG3sAy7e"
                 frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                style={{
-                  position: "absolute",
-                  top: "0",
-                  left: "0",
-                  width: "100%",
-                  height: "100%",
-                }}
+                className="h-full"
               />
             </div>
           </div>
