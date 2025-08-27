@@ -52,7 +52,7 @@ export default function Home({ pageData }: PageProps) {
       <div className="container mx-auto">
         {/* aboutheading.value */}
         <div className="py-20">
-          <div className="grid grid-cols-2 gap-10">
+          <div className="grid sm:grid-cols-2 gap-10">
             <div>
               <SplitTextReveal
                 text={pageData.aboutheading.value}
