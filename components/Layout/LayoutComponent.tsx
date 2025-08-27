@@ -13,21 +13,21 @@ export default function LayoutComponent({ children }: any) {
   const main = useRef<HTMLDivElement>(null);
   const smoother = useRef<any>(null);
 
-  // useGSAP(
-  //   () => {
-  //     smoother.current = ScrollSmoother.create({
-  //       smooth: 1,
-  //       effects: true,
-  //     });
-  //   },
-  //   {
-  //     scope: main,
-  //   }
-  // );
+  useGSAP(
+    () => {
+      smoother.current = ScrollSmoother.create({
+        smooth: 1,
+        effects: true,
+      });
+    },
+    {
+      scope: main,
+    }
+  );
   return (
     <div>
       <InitialPageLoader />
-      <BackgroundFX />
+      {/* <BackgroundFX /> */}
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

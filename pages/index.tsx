@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Rubik } from "next/font/google";
+  
 import { GetServerSideProps } from "next";
 import Globals from "@/modules/Globals";
 import { Homepage2026 } from "@/models/homepage2026";
