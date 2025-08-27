@@ -15,6 +15,8 @@ import JurySection from "@/components/home/JurySection";
 import SponsorSection from "@/components/home/SponsorSection";
 import FAQSection from "@/components/home/FAQSection";
 import Link from "next/link";
+import PopupBanner from "@/components/common/PopupBanner";
+import SubscribeForm from "@/components/home/SubscribeForm";
 
 type PageProps = {
   pageData: Homepage2026 | null;
@@ -26,12 +28,19 @@ export default function Home({ pageData }: PageProps) {
   }
   return (
     <main className="">
+      <PopupBanner
+        bannerImage={pageData.promobannerimage.value[0].url}
+        href={pageData.promobannerlink.value}
+        frequency="day" // "session" | "day" | "always"
+        openDelay={3000} // ms
+        alt=" Excellence and Creative Engineering Award"
+      />
       <HeroCenterAuto
         videoSrc={pageData.bannervideolink.value}
         poster={pageData.bannerimage.value[0]?.url}
         topOffsetPx={111}
         initialVw={34.5}
-        bannerHeading={["Celebrating Excellence", "in Engineering"]}
+        bannerHeading={["SUBMISSIONS ", "NOW OPEN!"]}
         ctaText="Apply Now"
         ctaHref="/award-categories"
         duration={1.2}
@@ -43,69 +52,72 @@ export default function Home({ pageData }: PageProps) {
       <div className="container mx-auto">
         {/* aboutheading.value */}
         <div className="py-20">
-          <SplitTextReveal
-            text={pageData.aboutheading.value}
-            className="block text-4xl md:text-5xl max-w-xl font-bold leading-[1.06] tracking-tight"
-            fromColor="#d1d5db"
-            toColor="#C89F32"
-            start="top 80%"
-            end="bottom 20%"
-            scrub={1}
-            duration={0.6}
-            stagger={0.06}
-            debug={false}
-          />
-          {/* aboutdescription.value */}
-          <SplitTextReveal
-            text={pageData.aboutdescription.value}
-            className="mt-6 text-lg md:text-xl"
-            fromColor="#d1d5db"
-            toColor="#111827"
-            start="top 85%"
-            end="top 25%"
-            scrub={1}
-            duration={0.4}
-            stagger={0.02}
-          />
+          <div className="grid grid-cols-2 gap-10">
+            <div>
+              <SplitTextReveal
+                text={pageData.aboutheading.value}
+                className="block text-4xl md:text-5xl max-w-xl font-bold leading-[1.06] tracking-tight"
+                fromColor="#d1d5db"
+                toColor="#C89F32"
+                start="top 80%"
+                end="bottom 20%"
+                scrub={1}
+                duration={0.6}
+                stagger={0.06}
+                debug={false}
+              />
+              {/* aboutdescription.value */}
+              <SplitTextReveal
+                text={pageData.aboutdescription.value}
+                className="mt-6 text-lg md:text-xl"
+                fromColor="#d1d5db"
+                toColor="#111827"
+                start="top 85%"
+                end="top 25%"
+                scrub={1}
+                duration={0.4}
+                stagger={0.02}
+              />
 
-          <div>
-            {pageData.aboutctabuttonlink.value && (
-              <div className="overflow-hidden mt-6">
-                <Link
-                  className="cta inline-block rounded-full hover:bg-black px-5 py-3 text-white backdrop-blur-md  bg-primary-3 transition"
-                  href={pageData.aboutctabuttonlink.value}
-                >
-                  {pageData.aboutctabuttonname.value}
-                </Link>
+              <div>
+                {pageData.aboutctabuttonlink.value && (
+                  <div className="overflow-hidden mt-6">
+                    <Link
+                      className="cta inline-block rounded-full hover:bg-black px-5 py-3 text-white backdrop-blur-md  bg-primary-3 transition"
+                      href={pageData.aboutctabuttonlink.value}
+                    >
+                      {pageData.aboutctabuttonname.value}
+                    </Link>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-
-          <div
-            className="mt-20 rounded-3xl overflow-hidden"
-            style={{
-              maxWidth: "100%",
-              height: "auto",
-              position: "relative",
-              paddingBottom: "56.25%",
-            }}
-          >
-            <iframe
-              title="YouTube Video"
-              width="100%"
-              height="100%"
-              src="https://www.youtube.com/embed/2Cvl6saWy-A?si=FLGo3BAecG3sAy7e"
-              frameBorder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
+            </div>
+            <div
+              className=" rounded-3xl overflow-hidden"
               style={{
-                position: "absolute",
-                top: "0",
-                left: "0",
-                width: "100%",
-                height: "100%",
+                maxWidth: "100%",
+                height: "auto",
+                position: "relative",
+                paddingBottom: "56.25%",
               }}
-            />
+            >
+              <iframe
+                title="YouTube Video"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/2Cvl6saWy-A?si=FLGo3BAecG3sAy7e"
+                frameBorder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{
+                  position: "absolute",
+                  top: "0",
+                  left: "0",
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+            </div>
           </div>
         </div>
 
@@ -145,13 +157,20 @@ export default function Home({ pageData }: PageProps) {
           <FAQSection pageData={pageData} />
         </div>
       </div>
+      <div className="py-10 bg-transparent" id="subscribe-section">
+        <SubscribeForm />
+      </div>
     </main>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
+  const { locale } = context;
+
+  const languageCode = locale === "ar" ? "arabic" : "default";
   try {
     const response: any = await Globals.KontentClient.item("home_page_2026")
+      .languageParameter(languageCode)
       .withParameter("depth", "4")
       .toPromise();
 

@@ -26,11 +26,17 @@ export default function Page({ pageData }: PageProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
+  const { locale } = context;
+
+  console.log('locale' , locale)
+
+  const languageCode = locale === "ar" ? "arabic" : "default";
   try {
     const response: any = await Globals.KontentClient.item(
       "uae_society_of_engineers_page"
     )
+      .languageParameter(languageCode)
       .withParameter("depth", "4")
       .toPromise();
 

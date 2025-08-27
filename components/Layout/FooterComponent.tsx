@@ -5,8 +5,7 @@ import Globals from "@/modules/Globals";
 import Link from "next/link";
 import React, { useEffect, useMemo, useState } from "react";
 import { gsap } from "@/lib/gsap-setup";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+
 import {
   FaFacebookF,
   FaInstagram,
@@ -15,7 +14,6 @@ import {
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
-const HEADER_OFFSET = 72;
 export default function FooterComponent() {
   const [pageData, setPageData] = useState<Globalcomponent | null>(null);
 
@@ -26,13 +24,6 @@ export default function FooterComponent() {
       .then((response: any) => setPageData(response.item))
       .catch(console.error);
   }, []);
-
-  const handleNavClick = (e: React.MouseEvent, href: string) => {
-    if (href?.startsWith("#")) {
-      e.preventDefault();
-      gsap.to(window, { scrollTo: href, ease: "power2.inOut" });
-    }
-  };
 
   const menuItems = useMemo(
     () => pageData?.footermenuitems?.value ?? [],
@@ -172,13 +163,15 @@ export default function FooterComponent() {
                 {pageData?.organizedbytext?.value ?? "Organized by"}
               </h4>
               {pageData?.organizedbylogo?.value?.[0]?.url ? (
-                <img
-                  className="w-[220px] max-w-full"
-                  src={pageData.organizedbylogo.value[0].url}
-                  alt={
-                    pageData.organizedbylogo.value[0].name || "Organizer Logo"
-                  }
-                />
+                <Link href={pageData.organizedbywebsitelink.value} target="_blank">
+                  <img
+                    className="w-[220px] max-w-full"
+                    src={pageData.organizedbylogo.value[0].url}
+                    alt={
+                      pageData.organizedbylogo.value[0].name || "Organizer Logo"
+                    }
+                  />
+                </Link>
               ) : null}
 
               {/* Back to top */}

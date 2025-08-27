@@ -18,6 +18,7 @@ const eslintConfig = [
     rules: {
       "@next/next/no-img-element": "off", // disable warning for <img>
       "react/jsx-key": "off",             // disable missing key error
+      "react-hooks/exhaustive-deps": "off"
     },
   },
 ];

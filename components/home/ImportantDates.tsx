@@ -53,7 +53,7 @@ export default function ImportantDates({ pageData }: Props) {
                     <div className="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-white border-4 border-primary-3 shadow-md z-10" />
 
                     <div
-                      className={`w-5/12 p-6 bg-white rounded-2xl shadow-md border border-slate-200 relative z-20 hover:ring-2 hover:ring-primary-3 ${
+                      className={`w-5/12 p-6 bg-white rounded-2xl shadow-md  relative z-20 hover:ring-2 hover:ring-primary-3 ${
                         isLeft ? "text-right" : "text-left"
                       }`}
                     >

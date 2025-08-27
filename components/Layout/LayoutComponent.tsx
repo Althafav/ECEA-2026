@@ -6,6 +6,7 @@ import { ScrollSmoother } from "gsap/dist/ScrollSmoother";
 import MenuComponent from "./Menu/MenuComponent";
 import FooterComponent from "./FooterComponent";
 import BackgroundFX from "../common/BackgroundFX";
+import InitialPageLoader from "../common/InitialPageLoader";
 
 export default function LayoutComponent({ children }: any) {
   const main = useRef<HTMLDivElement>(null);
@@ -24,11 +25,12 @@ export default function LayoutComponent({ children }: any) {
   );
   return (
     <div>
-      <MenuComponent />
+      <InitialPageLoader />
       <BackgroundFX />
       <div id="smooth-wrapper" className="flex flex-col" ref={main}>
         <div id="smooth-content">
-          <div className="flex-1 min-h-screen mt-[94px]">{children}</div>
+          <MenuComponent />
+          <div className="">{children}</div>
           <FooterComponent />
         </div>
       </div>
