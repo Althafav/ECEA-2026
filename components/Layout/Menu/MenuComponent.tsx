@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import {
-  FaFacebook,
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
@@ -14,17 +13,17 @@ import {
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { HiMenuAlt4, HiX, HiChevronDown } from "react-icons/hi";
-import { IoMdArrowDropdown } from "react-icons/io";
 
 export default function MenuComponent() {
   const [pageData, setPageData] = useState<Globalcomponent | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState<number | null>(null);
-  const { asPath, locale, push, locales } = useRouter();
-
+  const { asPath, locale, push } = useRouter();
+  const languageCode = locale === "ar" ? "arabic" : "default";
   useEffect(() => {
     let mounted = true;
     Globals.KontentClient.item("global_component")
+      .languageParameter(languageCode)
       .withParameter("depth", "6")
       .toPromise()
       .then((response: any) => mounted && setPageData(response.item))
@@ -34,11 +33,12 @@ export default function MenuComponent() {
     };
   }, []);
 
-  // Body scroll lock
+  // Body scroll lock (mobile-safe)
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = isOpen ? "hidden" : prev || "";
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = prev || "";
     };
   }, [isOpen]);
 
@@ -47,92 +47,108 @@ export default function MenuComponent() {
   if (!pageData) return null;
 
   return (
-    <div>
-      <div className="menu-wrapper     w-full z-50 shadow">
-        <div className="bg-primary-2 p-2">
+    <div className="w-full">
+      <div className="menu-wrapper w-full z-50 shadow overflow-x-clip">
+        {/* Top ribbon */}
+        <div className="bg-primary-2 px-4 py-2">
           <div className="container mx-auto">
-            <p
-              className="text-white text-center max-w-3xl mx-auto"
-              style={{ fontSize: "15px" }}
-            >
+            <p className="text-white text-center mx-auto text-xs sm:text-sm leading-relaxed">
               Under the patronage and presence of Sheikh Rashid bin Hamdan bin
-              Rashid Al Maktoum, <br /> Supreme President of Hamdan bin Rashid
-              Al Maktoum Foundation for Medical and Educational Sciences
+              Rashid Al Maktoum,
+              <br className="hidden sm:block" />
+              Supreme President of Hamdan bin Rashid Al Maktoum Foundation for
+              Medical and Educational Sciences
             </p>
           </div>
         </div>
-        <div className="bg-white py-5">
-          <nav className="container mx-auto">
-            <div className="flex justify-between items-center">
+
+        {/* Header */}
+        <div className="bg-white py-4 sm:py-5">
+          <nav className="container mx-auto px-4">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               {/* Logos */}
-              <div className="flex gap-4 items-center">
-                <Link href="/">
+              <div className="flex items-center gap-3 sm:gap-4 flex-wrap min-w-0">
+                <Link href="/" className="block">
                   <img
                     src={pageData?.ecealogo?.value?.[0]?.url}
                     alt="ECEA"
-                    className="w-[140px] md:w-[180px]"
+                    className="h-10 sm:h-12 md:h-14 w-auto max-w-[44vw] sm:max-w-none object-contain"
                   />
                 </Link>
-                <div className="h-6 w-px bg-gray-300" />
-                <Link href={pageData.sewebsitelink.value}>
+                <span className="hidden sm:block h-6 w-px bg-gray-300" />
+                {/* Use anchor for external site to avoid Next prefetch */}
+                <a
+                  href={pageData?.sewebsitelink?.value}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
                   <img
                     src={pageData?.selogo?.value?.[0]?.url}
                     alt="Society"
-                    className="w-[140px] md:w-[180px]"
+                    className="h-10 sm:h-12 md:h-14 w-auto max-w-[44vw] sm:max-w-none object-contain"
                   />
-                </Link>
+                </a>
               </div>
 
-              <div className="flex gap-3">
-                <div className="flex gap-1">
-                  <button
-                    className="lang-btn text-sm cursor-pointer border border-gray-300 rounded-full text-black p-2"
-                    onClick={() =>
-                      push(asPath, asPath, {
-                        locale: locale === "en" ? "ar" : "en",
-                      })
-                    }
-                  >
-                    {locale === "en" ? "العربية" : "English"}
-                  </button>
-                </div>
-                <div className="flex items-center cursor-pointer hover:bg-gray-100 rounded-lg p-2">
-                  <span>Menu</span>
-                  <button
-                    onClick={() => setIsOpen(true)}
-                    className="  focus:outline-none"
-                    aria-label="Open menu"
-                  >
-                    <IoMdArrowDropdown  size={28} />
-                  </button>
-                </div>
+              {/* Actions */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <button
+                  className="lang-btn text-xs sm:text-sm cursor-pointer border border-gray-300 rounded-full text-black px-3 py-1.5"
+                  onClick={() =>
+                    push(asPath, asPath, {
+                      locale: locale === "en" ? "ar" : "en",
+                    })
+                  }
+                >
+                  {locale === "en" ? "العربية" : "English"}
+                </button>
+
+                <button
+                  onClick={() => setIsOpen(true)}
+                  className="inline-flex items-center gap-2 rounded-md px-3 py-2 hover:bg-gray-100 focus:outline-none"
+                  aria-label="Open menu"
+                >
+                  <span className="text-sm sm:text-base">Menu</span>
+                  <HiMenuAlt4 size={22} />
+                </button>
               </div>
             </div>
           </nav>
 
           {/* Overlay */}
           {isOpen && (
-            <div className="fixed inset-0 z-[70] bg-white/95 backdrop-blur-sm flex flex-col min-h-screen">
+            <div className="fixed inset-0 z-[70] bg-white/95 backdrop-blur-sm flex flex-col min-h-screen overflow-x-hidden">
               {/* Top bar */}
-              <div className="container mx-auto flex justify-between items-center py-5">
-                <div className="flex gap-4 items-center">
-                  <img
-                    src={pageData?.ecealogo?.value?.[0]?.url}
-                    alt="ECEA"
-                    className="w-[140px] md:w-[180px]"
-                  />
-                  <div className="h-6 w-px bg-gray-300" />
-                  <img
-                    src={pageData?.selogo?.value?.[0]?.url}
-                    alt="Society"
-                    className="w-[140px] md:w-[180px]"
-                  />
+              <div className="sticky top-0 bg-white/80 backdrop-blur-sm border-b border-gray-200">
+                <div className="container mx-auto px-4 py-4 sm:py-5 flex items-center justify-between">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <img
+                      src={pageData?.ecealogo?.value?.[0]?.url}
+                      alt="ECEA"
+                      className="h-9 sm:h-10 w-auto object-contain"
+                    />
+                    <span className="hidden sm:block h-6 w-px bg-gray-300" />
+                    <img
+                      src={pageData?.selogo?.value?.[0]?.url}
+                      alt="Society"
+                      className="h-9 sm:h-10 w-auto object-contain"
+                    />
+                  </div>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="inline-flex items-center gap-2 rounded-md px-3 py-2 hover:bg-gray-100"
+                    aria-label="Close menu"
+                  >
+                    <HiX size={22} />
+                    <span className="hidden sm:inline">Close</span>
+                  </button>
                 </div>
               </div>
 
               {/* Menu list */}
-              <div className="container mx-auto flex-1 overflow-y-auto">
-                <ul className="space-y-4">
+              <div className="container mx-auto px-4 flex-1 overflow-y-auto">
+                <ul className="divide-y divide-gray-200">
                   {pageData?.headermenuitems?.value?.map(
                     (item: any, index: number) => {
                       const hasChildren = !!item?.items?.value?.length;
@@ -141,34 +157,35 @@ export default function MenuComponent() {
                       const newTab = item?.target?.value === 1;
 
                       return (
-                        <li key={item?.system?.id ?? index}>
+                        <li key={item?.system?.id ?? index} className="py-1">
                           {hasChildren ? (
                             <>
-                              {/* Entire row toggles submenu */}
+                              {/* Row toggles submenu */}
                               <button
                                 onClick={() => toggle(index)}
-                                className="w-full flex justify-between items-center text-2xl font-semibold text-gray-800 py-3 border-b border-gray-200"
+                                className="w-full flex items-center justify-between py-3 sm:py-4"
                                 aria-expanded={open}
                                 aria-controls={`submenu-${index}`}
                               >
-                                <span className="text-left">
+                                <span className="text-base sm:text-2xl font-semibold text-gray-800 text-left">
                                   {item?.name?.value}
                                 </span>
                                 <HiChevronDown
-                                  className={`transition-transform ${
+                                  className={`shrink-0 transition-transform duration-200 ${
                                     open ? "rotate-180" : ""
                                   }`}
+                                  size={22}
                                 />
                               </button>
 
-                              {/* Children (accordion) */}
+                              {/* Children with grid auto-height animation */}
                               <div
                                 id={`submenu-${index}`}
-                                className={`overflow-hidden transition-[max-height] duration-200 ${
-                                  open ? "max-h-60" : "max-h-0"
+                                className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                                  open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                                 }`}
                               >
-                                <ul className="pl-4 mt-2 space-y-2 pb-2">
+                                <ul className="overflow-hidden pl-3 sm:pl-4 pb-2 sm:pb-3 space-y-1 sm:space-y-2">
                                   {item.items.value.map(
                                     (sub: any, subIndex: number) => {
                                       const subHref = sub?.link?.value || "#";
@@ -186,7 +203,7 @@ export default function MenuComponent() {
                                                 ? "noopener noreferrer"
                                                 : undefined
                                             }
-                                            className="block py-2 text-lg text-gray-600 hover:text-gray-900"
+                                            className="block py-2 text-sm sm:text-lg text-gray-600 hover:text-gray-900"
                                             onClick={() => setIsOpen(false)}
                                           >
                                             {sub?.name?.value}
@@ -199,12 +216,11 @@ export default function MenuComponent() {
                               </div>
                             </>
                           ) : (
-                            // No children -> plain link
                             <Link
                               href={href}
                               target={newTab ? "_blank" : "_self"}
                               rel={newTab ? "noopener noreferrer" : undefined}
-                              className="block text-2xl font-semibold text-gray-800 py-3 border-b border-gray-200 hover:text-gray-900"
+                              className="block py-3 sm:py-4 text-base sm:text-2xl font-semibold text-gray-800 hover:text-gray-900"
                               onClick={() => setIsOpen(false)}
                             >
                               {item?.name?.value}
@@ -218,9 +234,8 @@ export default function MenuComponent() {
               </div>
 
               {/* Social Media */}
-
-              <div className="container mx-auto py-10">
-                <div className="flex items-center justify-start gap-3">
+              <div className="container mx-auto px-4 py-6 sm:py-10">
+                <div className="flex flex-wrap items-center gap-3">
                   {pageData?.facebookurl?.value && (
                     <Link
                       href={pageData.facebookurl.value}
@@ -280,7 +295,7 @@ export default function MenuComponent() {
               </div>
 
               {/* Footer */}
-              <div className="container mx-auto py-6 border-t border-gray-200 text-gray-500 text-sm">
+              <div className="container mx-auto px-4 py-4 sm:py-6 border-t border-gray-200 text-gray-500 text-xs sm:text-sm">
                 © {new Date().getFullYear()} Excellence And Creative Engineering
                 Awards. All rights reserved.
               </div>
