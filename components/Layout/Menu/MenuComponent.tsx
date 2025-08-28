@@ -53,12 +53,25 @@ export default function MenuComponent() {
         {/* Top ribbon */}
         <div className="bg-primary-2 px-4 py-2">
           <div className="container mx-auto">
-            <p className="text-white text-center mx-auto text-xs sm:text-sm leading-relaxed">
-              Under the patronage and presence of Sheikh Rashid bin Hamdan bin
-              Rashid Al Maktoum,
-              <br className="hidden sm:block" />
-              Supreme President of Hamdan bin Rashid Al Maktoum Foundation for
-              Medical and Educational Sciences
+            <p
+              className="text-white text-center mx-auto text-xs sm:text-sm leading-relaxed"
+              dir={locale === "ar" ? "rtl" : "ltr"}
+            >
+              {locale === "ar" ? (
+                <>
+                  تحت رعاية الشيخ راشد بن حمدان بن راشد آل مكتوم،
+                  <br className="hidden sm:block" />
+                  الرئيس الأعلى لمؤسسة حمدان بن راشد للعلوم الطبية والتربوية
+                </>
+              ) : (
+                <>
+                  Under the patronage and presence of Sheikh Rashid bin Hamdan
+                  bin Rashid Al Maktoum,
+                  <br className="hidden sm:block" />
+                  Supreme President of Hamdan bin Rashid Al Maktoum Foundation
+                  for Medical and Educational Sciences
+                </>
+              )}
             </p>
           </div>
         </div>
@@ -110,7 +123,9 @@ export default function MenuComponent() {
                   className="inline-flex items-center gap-2 rounded-md px-3 py-2 hover:bg-gray-100 focus:outline-none"
                   aria-label="Open menu"
                 >
-                  <span className="text-sm sm:text-base">Menu</span>
+                  <span className="text-sm sm:text-base">
+                    {locale === "ar" ? "القائمة" : "Menu"}
+                  </span>
                   <IoMdArrowDropdown size={22} />
                 </button>
               </div>
@@ -130,11 +145,13 @@ export default function MenuComponent() {
                       className="h-9 sm:h-10 w-auto object-contain"
                     />
                     <span className="hidden sm:block h-6 w-px bg-gray-300" />
-                    <img
-                      src={pageData?.selogo?.value?.[0]?.url}
-                      alt="Society"
-                      className="h-9 sm:h-10 w-auto object-contain"
-                    />
+                    <Link href={pageData.sewebsitelink.value}>
+                      <img
+                        src={pageData?.selogo?.value?.[0]?.url}
+                        alt="Society"
+                        className="h-9 sm:h-10 w-auto object-contain"
+                      />
+                    </Link>
                   </div>
                   <button
                     onClick={() => setIsOpen(false)}
@@ -142,7 +159,9 @@ export default function MenuComponent() {
                     aria-label="Close menu"
                   >
                     <HiX size={22} />
-                    <span className="hidden sm:inline">Close</span>
+                    <span className="hidden sm:inline">
+                      {locale === "ar" ? "إغلاق" : "Close"}
+                    </span>
                   </button>
                 </div>
               </div>

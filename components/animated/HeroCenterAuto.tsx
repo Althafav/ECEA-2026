@@ -156,8 +156,8 @@ export default function HeroCenterAuto({
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden"
-      style={{ height: `calc(100dvh - ${topOffsetPx}px)` }}
+      className="relative overflow-hidden h-[350px] sm:h-screen w-full "
+      
     >
       <div ref={panelRef} className="absolute inset-0">
         <video

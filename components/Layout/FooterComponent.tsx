@@ -163,9 +163,12 @@ export default function FooterComponent() {
                 {pageData?.organizedbytext?.value ?? "Organized by"}
               </h4>
               {pageData?.organizedbylogo?.value?.[0]?.url ? (
-                <Link href={pageData.organizedbywebsitelink.value} target="_blank">
+                <Link
+                  href={pageData.organizedbywebsitelink.value}
+                  target="_blank"
+                >
                   <img
-                    className="w-[220px] max-w-full"
+                    className="w-24 h-12 object-contain"
                     src={pageData.organizedbylogo.value[0].url}
                     alt={
                       pageData.organizedbylogo.value[0].name || "Organizer Logo"

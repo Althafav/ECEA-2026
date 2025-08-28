@@ -5,15 +5,15 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap-setup";
 
 type ResponsiveVw =
-  | number                         // e.g. 30
+  | number // e.g. 30
   | { base: number; md?: number; lg?: number }; // responsive overrides
 
 type Props = {
   videoSrc: string;
   poster?: string;
-  topOffsetPx?: number;     // header height to subtract (e.g. 111)
+  topOffsetPx?: number; // header height to subtract (e.g. 111)
   initialVw?: ResponsiveVw; // starts visible width (vw), centered
-  endScroll?: string;       // e.g. "+=120%"
+  endScroll?: string; // e.g. "+=120%"
   overlayClassName?: string;
   desktopLines: string[];
   mobileLines?: string[];
@@ -29,7 +29,7 @@ export default function HeroCenterExpand({
   endScroll = "+=120%",
   overlayClassName = "bg-black/30",
   desktopLines,
-  mobileLines,
+
   ctaText,
   ctaHref,
 }: Props) {
@@ -68,7 +68,9 @@ export default function HeroCenterExpand({
       });
 
       // text lines slide up from 200%
-      const lines = Array.from(linesWrap.querySelectorAll<HTMLElement>(".line"));
+      const lines = Array.from(
+        linesWrap.querySelectorAll<HTMLElement>(".line")
+      );
       const cta = linesWrap.querySelector<HTMLElement>(".cta");
       gsap.set(lines, { yPercent: 200 });
       if (cta) gsap.set(cta, { yPercent: 120, autoAlpha: 0 });
@@ -94,10 +96,14 @@ export default function HeroCenterExpand({
       });
 
       // expand center → full, and reveal lines as it grows
-      tl.to(panel, { "--sideVW": "0vw", ease: "none" } as any, 0)
-        .to(lines, { yPercent: 0, ease: "power2.out", stagger: 0.12 }, 0.15);
+      tl.to(panel, { "--sideVW": "0vw", ease: "none" } as any, 0).to(
+        lines,
+        { yPercent: 0, ease: "power2.out", stagger: 0.12 },
+        0.15
+      );
 
-      if (cta) tl.to(cta, { yPercent: 0, autoAlpha: 1, ease: "power2.out" }, 0.45);
+      if (cta)
+        tl.to(cta, { yPercent: 0, autoAlpha: 1, ease: "power2.out" }, 0.45);
 
       // final safety with Smoother
       ScrollTrigger.refresh();
@@ -107,16 +113,12 @@ export default function HeroCenterExpand({
   }, [initialVw, endScroll]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden"
-      style={{ height: `calc(100dvh - ${topOffsetPx}px)` }}
-    >
+    <section ref={sectionRef} className="relative overflow-hidden w-full">
       {/* Panel that reveals from center by animating --sideVW (no stretch) */}
       <div ref={panelRef} className="absolute inset-0">
         {/* Video stays object-cover behind the clip */}
         <video
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-screen w-full object-cover"
           loop
           muted
           autoPlay
@@ -126,7 +128,11 @@ export default function HeroCenterExpand({
           <source src={videoSrc} type="video/mp4" />
         </video>
 
-        {overlayClassName && <div className={`absolute inset-0 pointer-events-none ${overlayClassName}`} />}
+        {overlayClassName && (
+          <div
+            className={`absolute inset-0 pointer-events-none ${overlayClassName}`}
+          />
+        )}
 
         {/* Headings */}
         <div
@@ -148,22 +154,6 @@ export default function HeroCenterExpand({
                   className="cta inline-block rounded-xl bg-white/10 px-5 py-3 text-white backdrop-blur-md ring-1 ring-white/30 hover:bg-white/20 transition"
                   href={ctaHref}
                 >
-                  {ctaText}
-                </a>
-              </div>
-            )}
-          </div>
-
-          {/* Mobile */}
-          <div className="md:hidden text-white">
-            {(mobileLines ?? desktopLines).map((t, i) => (
-              <div key={i} className="overflow-hidden">
-                <h1 className="line text-3xl font-extrabold drop-shadow">{t}</h1>
-              </div>
-            ))}
-            {ctaText && ctaHref && (
-              <div className="overflow-hidden mt-4">
-                <a className="cta inline-block rounded-lg bg-white/10 px-4 py-2 text-white backdrop-blur-md ring-1 ring-white/30" href={ctaHref}>
                   {ctaText}
                 </a>
               </div>

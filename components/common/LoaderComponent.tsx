@@ -62,8 +62,8 @@ export default function LoaderComponent({
           alt="ECEA Logo"
           width={width}
           height={Math.round(width * 0.38) || 100}
-          className="h-auto w-[220px] max-w-[60vw] animate-pulse"
-          style={{ width, height: "auto" }}
+          className="object-contain w-[220px] animate-pulse"
+      
         />
 
         {/* Minimal bar */}

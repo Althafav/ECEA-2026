@@ -1,4 +1,3 @@
-  
 import { GetServerSideProps } from "next";
 import Globals from "@/modules/Globals";
 import { Homepage2026 } from "@/models/homepage2026";
@@ -19,9 +18,10 @@ import SubscribeForm from "@/components/home/SubscribeForm";
 
 type PageProps = {
   pageData: Homepage2026 | null;
+  locale: string;
 };
 
-export default function Home({ pageData }: PageProps) {
+export default function Home({ pageData, locale }: PageProps) {
   if (!pageData) {
     return null;
   }
@@ -39,8 +39,12 @@ export default function Home({ pageData }: PageProps) {
         poster={pageData.bannerimage.value[0]?.url}
         topOffsetPx={111}
         initialVw={34.5}
-        bannerHeading={["SUBMISSIONS ", "NOW OPEN!"]}
-        ctaText="Apply Now"
+        bannerHeading={
+          locale === "ar"
+            ? ["التقديم", "مفتوح الآن!"]
+            : ["SUBMISSIONS ", "NOW OPEN!"]
+        }
+        ctaText={locale === "ar" ? "قدّم الآن" : "Apply Now"}
         ctaHref="/award-categories"
         duration={1.2}
         linesStagger={0.12}
@@ -91,10 +95,7 @@ export default function Home({ pageData }: PageProps) {
                 )}
               </div>
             </div>
-            <div
-              className=" rounded-3xl overflow-hidden"
-              
-            >
+            <div className=" rounded-3xl overflow-hidden">
               <iframe
                 title="YouTube Video"
                 width="100%"
@@ -167,6 +168,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     return {
       props: {
         pageData,
+        locale,
       },
     };
   } catch (error) {

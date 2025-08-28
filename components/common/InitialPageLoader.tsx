@@ -55,7 +55,7 @@ export default function InitialPageLoader() {
         <img
           src="/assets/logos/ecea-logo-colored.png"
           alt="ECEA"
-          className="h-16 w-auto select-none animate-pulse motion-reduce:animate-none"
+          className=" w-[250px] object-contain select-none animate-pulse motion-reduce:animate-none"
           draggable={false}
         />
 

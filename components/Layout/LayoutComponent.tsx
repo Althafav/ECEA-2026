@@ -26,11 +26,9 @@ export default function LayoutComponent({ children }: any) {
   );
   return (
     <div>
-      <InitialPageLoader />
+      {/* <InitialPageLoader /> */}
       <BackgroundFX />
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+   
       <div id="smooth-wrapper" className="flex flex-col" ref={main}>
         <div id="smooth-content">
           <MenuComponent />
