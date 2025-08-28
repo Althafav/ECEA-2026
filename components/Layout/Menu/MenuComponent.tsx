@@ -79,55 +79,52 @@ export default function MenuComponent() {
         {/* Header */}
         <div className="bg-white py-4 sm:py-5" dir="ltr">
           <nav className="container mx-auto px-4">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            {/* was: flex flex-col ... */}
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               {/* Logos */}
-              <div className="flex items-center gap-3 sm:gap-4 flex-wrap min-w-0">
-                <Link href="/" className="">
+              <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                <Link href="/" className="block">
                   <img
                     src={pageData?.ecealogo?.value?.[0]?.url}
                     alt="ECEA"
-                    className="h-10 sm:h-12 md:h-14 w-[120px] sm:w-[180px]  sm:max-w-none object-contain"
+                    className="h-10 sm:h-12 md:h-14 w-auto max-w-[44vw] sm:max-w-none object-contain"
                   />
                 </Link>
                 <span className="hidden sm:block h-6 w-px bg-gray-300" />
-                {/* Use anchor for external site to avoid Next prefetch */}
-                <Link
+                <a
                   href={pageData?.sewebsitelink?.value}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className=""
+                  className="block"
                 >
                   <img
                     src={pageData?.selogo?.value?.[0]?.url}
                     alt="Society"
-                    className="h-10 sm:h-12 md:h-14 w-[120px]  sm:w-[180px]   sm:max-w-none object-contain"
+                    className="h-10 sm:h-12 md:h-14 w-auto max-w-[44vw] sm:max-w-none object-contain"
                   />
-                </Link>
+                </a>
               </div>
 
-              {/* Actions */}
-              <div className="flex items-center gap-2 sm:gap-3">
+              {/* Actions — add self-end on mobile so it sticks to the right */}
+              <div className="flex items-center gap-2 sm:gap-3 self-end sm:self-auto">
                 <button
-                  className="lang-btn text-xs sm:text-sm cursor-pointer border border-gray-300 rounded-full text-black px-3 py-1.5"
-                  onClick={() => {
-                    const newLocale = locale === "en" ? "ar" : "en";
-                    push(asPath, asPath, { locale: newLocale }).then(() => {
-                      window.location.reload();
-                    });
-                  }}
+                  className="lang-btn text-xs sm:text-sm border border-gray-300 rounded-full text-black px-3 py-1.5"
+                  onClick={() =>
+                    push(asPath, asPath, {
+                      locale: locale === "en" ? "ar" : "en",
+                    })
+                  }
                 >
                   {locale === "en" ? "العربية" : "English"}
                 </button>
 
                 <button
                   onClick={() => setIsOpen(true)}
-                  className="inline-flex items-center gap-2 rounded-md px-3 py-2 hover:bg-gray-100 focus:outline-none"
+                  className="inline-flex items-center gap-2 rounded-md px-3 py-2 hover:bg-gray-100"
                   aria-label="Open menu"
                 >
-                  <span className="text-sm sm:text-base">
-                    {locale === "ar" ? "القائمة" : "Menu"}
-                  </span>
-                  <IoMdArrowDropdown size={22} />
+                  <span className="text-sm sm:text-base">Menu</span>
+                  <HiMenuAlt4 size={22} />
                 </button>
               </div>
             </div>
@@ -140,7 +137,7 @@ export default function MenuComponent() {
               <div className="sticky top-0 bg-white/80 backdrop-blur-sm border-b border-gray-200">
                 <div className="container mx-auto px-4 py-4 sm:py-5 flex items-center justify-between">
                   <div className="flex items-center gap-3 sm:gap-4">
-                    <Link href="/">
+                    <Link href="/" onClick={() => setIsOpen(false)}>
                       <img
                         src={pageData?.ecealogo?.value?.[0]?.url}
                         alt="ECEA"
