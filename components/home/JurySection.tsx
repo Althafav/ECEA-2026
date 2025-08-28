@@ -1,6 +1,7 @@
 // app/components/JurySection.tsx
 "use client";
 
+import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
 
 type Props = { pageData: any };
@@ -9,7 +10,7 @@ export default function JurySection({ pageData }: Props) {
   const items = useMemo(() => pageData?.juryitems?.value ?? [], [pageData]);
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? items : items.slice(0, 4);
-
+  const { locale } = useRouter();
   return (
     <section>
       <div className="mx-auto max-w-6xl">
@@ -68,7 +69,7 @@ export default function JurySection({ pageData }: Props) {
               onClick={() => setShowAll(true)}
               className="inline-flex items-center rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-800 shadow-sm hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
             >
-              Show all
+              {locale === "ar" ? "عرض الكل" : "Show all"}
             </button>
           </div>
         )}

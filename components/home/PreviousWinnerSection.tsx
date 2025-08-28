@@ -133,7 +133,7 @@ export default function PreviousWinnerSection({ pageData }: Props) {
       <div className="mx-auto max-w-6xl ">
         <header className="mb-8">
           <h2 className="text-center text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
-            Previous Winners
+           {pageData.previouswinnerheading.value}
           </h2>
         </header>
 

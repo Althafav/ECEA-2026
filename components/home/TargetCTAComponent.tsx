@@ -1,16 +1,18 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { HiArrowRight } from "react-icons/hi";
 
 type Props = { pageData: any };
 
 export default function TargetCTAComponent({ pageData }: Props) {
-  const heading: string = "Elevate Your Presence. Expand Your Impact.";
+  const { locale } = useRouter();
+  const heading: string = pageData.targetctaheading.value;
 
   const items = pageData?.targetctaitems?.value ?? [];
 
   // Emphasize specific words in the heading to match the reference
-  const highlightWords = ["Presence", "Impact"];
+  const highlightWords = locale == "ar" ? ["حضورك", "تأثيرك"] : ["Presence", "Impact"];
   const parts = heading.split(new RegExp(`(${highlightWords.join("|")})`, "i"));
 
   return (

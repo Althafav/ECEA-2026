@@ -1,10 +1,13 @@
 import JsLoader from "@/modules/JsLoader";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 export default function SubscribeForm() {
   useEffect(() => {
     JsLoader.loadFile(`/assets/js/newsletter.js`);
   }, []);
+
+  const {locale} = useRouter();
 
   return (
     <div className="flex justify-center items-center">
@@ -31,7 +34,7 @@ export default function SubscribeForm() {
 
         {/* Heading */}
         <h2 className="text-xl font-semibold text-center text-gray-800">
-          Subscribe to our Newsletter
+         {locale === "ar" ? "اشترك في نشرتنا الإخبارية": " Subscribe to our Newsletter"}
         </h2>
 
         <div className="_form-content">
@@ -43,7 +46,7 @@ export default function SubscribeForm() {
                 id="email"
                 name="email"
                 className="form-control newsletter-field m-b-10 w-full px-4 py-3 border border-gray-100 bg-white rounded-lg text-black focus:ring-2 focus:ring-primary-3 focus:outline-none"
-                placeholder="Email"
+                placeholder={locale === "ar" ? "البريد الإلكتروني" : "Email"}
                 required
               />
             </div>
@@ -63,7 +66,7 @@ export default function SubscribeForm() {
                 id="_form_315_submit"
                 className="newsletter-submit w-full bg-primary-3 text-white font-medium py-3 rounded-full hover:bg-primary-2 transition-all"
               >
-                Submit
+               {locale === "ar" ? "اشترك" : "Submit"}
               </button>
             </div>
           </div>

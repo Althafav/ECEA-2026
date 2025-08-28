@@ -4,6 +4,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useRouter } from "next/router";
 
 type Props = { pageData: any };
 type BenefitItem = {
@@ -161,6 +162,8 @@ function BenefitCard({
   const title = item?.name?.value ?? "";
   const hasHtml = !!item?.content?.value;
 
+  const { locale } = useRouter();
+
   return (
     <li className="h-full ">
       {/* make wrapper fill height */}
@@ -202,7 +205,7 @@ function BenefitCard({
                          disabled:opacity-50 disabled:cursor-not-allowed
                          focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60"
             >
-              Know more
+            {locale === "ar" ? "المزيد" : "Know more"}
               <svg
                 className="h-4 w-4"
                 viewBox="0 0 20 20"
