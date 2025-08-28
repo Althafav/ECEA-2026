@@ -13,13 +13,16 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { useRouter } from "next/router";
 
 export default function FooterComponent() {
   const [pageData, setPageData] = useState<Globalcomponent | null>(null);
-
+  const { locale } = useRouter();
+  const languageCode = locale === "ar" ? "arabic" : "default";
   useEffect(() => {
     Globals.KontentClient.item("global_component")
       .withParameter("depth", "6")
+      .languageParameter(languageCode)
       .toPromise()
       .then((response: any) => setPageData(response.item))
       .catch(console.error);
@@ -51,9 +54,9 @@ export default function FooterComponent() {
               />
             </div>
 
-            <p className="text-sm text-slate-300/90 leading-relaxed max-w-xs">
+            {/* <p className="text-sm text-slate-300/90 leading-relaxed max-w-xs">
               Honoring innovation and excellence in engineering.
-            </p>
+            </p> */}
 
             <div className="mt-6 flex items-center gap-3">
               {pageData?.facebookurl?.value && (
@@ -107,7 +110,7 @@ export default function FooterComponent() {
           {/* Quick Links */}
           <nav className="footer-reveal md:col-span-1">
             <h4 className="mb-4 text-lg font-semibold tracking-wide text-white">
-              Quick Links
+              {locale === "ar" ? "روابط سريعة": "Quick Links"}
             </h4>
 
             {/* Two-column auto layout when many items */}
@@ -189,7 +192,7 @@ export default function FooterComponent() {
                 className="mt-6 inline-flex items-center rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm text-slate-100 transition hover:bg-white/10"
                 aria-label="Back to top"
               >
-                ↑ Back to top
+                ↑ {locale === "ar" ? "العودة إلى الأعلى": "Back to top"}
               </button>
             </div>
           </div>

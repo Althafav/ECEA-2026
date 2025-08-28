@@ -27,13 +27,13 @@ export default function Home({ pageData, locale }: PageProps) {
   }
   return (
     <main className="w-full">
-      {/* <PopupBanner
+      <PopupBanner
         bannerImage={pageData.promobannerimage.value[0].url}
         href={pageData.promobannerlink.value}
         frequency="day" // "session" | "day" | "always"
         openDelay={3000} // ms
         alt=" Excellence and Creative Engineering Award"
-      /> */}
+      />
       <HeroCenterAuto
         videoSrc={pageData.bannervideolink.value}
         poster={pageData.bannerimage.value[0]?.url}

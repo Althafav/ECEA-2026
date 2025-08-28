@@ -183,8 +183,8 @@ export default function HeroCenterAuto({
         >
           <div className="text-white">
             {lines.map((t, i) => (
-              <div key={i} className="overflow-hidden">
-                <h1 className="line text-4xl lg:text-6xl leading-20  font-extrabold drop-shadow">
+              <div key={i} className="">
+                <h1 className="line text-4xl lg:text-6xl leading-24   font-extrabold drop-shadow">
                   {t}
                 </h1>
               </div>

@@ -77,7 +77,7 @@ export default function MenuComponent() {
         </div>
 
         {/* Header */}
-        <div className="bg-white py-4 sm:py-5">
+        <div className="bg-white py-4 sm:py-5" dir="ltr">
           <nav className="container mx-auto px-4">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               {/* Logos */}
@@ -109,11 +109,12 @@ export default function MenuComponent() {
               <div className="flex items-center gap-2 sm:gap-3">
                 <button
                   className="lang-btn text-xs sm:text-sm cursor-pointer border border-gray-300 rounded-full text-black px-3 py-1.5"
-                  onClick={() =>
-                    push(asPath, asPath, {
-                      locale: locale === "en" ? "ar" : "en",
-                    })
-                  }
+                  onClick={() => {
+                    const newLocale = locale === "en" ? "ar" : "en";
+                    push(asPath, asPath, { locale: newLocale }).then(() => {
+                      window.location.reload();
+                    });
+                  }}
                 >
                   {locale === "en" ? "العربية" : "English"}
                 </button>
@@ -134,18 +135,20 @@ export default function MenuComponent() {
 
           {/* Overlay */}
           {isOpen && (
-            <div className="fixed inset-0 z-[70] bg-white/95 backdrop-blur-sm flex flex-col min-h-screen overflow-x-hidden">
+            <div className="fixed inset-0 z-[70] bg-white/95 backdrop-blur-sm flex flex-col h-screen overflow-x-hidden">
               {/* Top bar */}
               <div className="sticky top-0 bg-white/80 backdrop-blur-sm border-b border-gray-200">
                 <div className="container mx-auto px-4 py-4 sm:py-5 flex items-center justify-between">
                   <div className="flex items-center gap-3 sm:gap-4">
-                    <img
-                      src={pageData?.ecealogo?.value?.[0]?.url}
-                      alt="ECEA"
-                      className="h-9 sm:h-10 w-auto object-contain"
-                    />
+                    <Link href="/">
+                      <img
+                        src={pageData?.ecealogo?.value?.[0]?.url}
+                        alt="ECEA"
+                        className="h-9 sm:h-10 w-auto object-contain"
+                      />
+                    </Link>
                     <span className="hidden sm:block h-6 w-px bg-gray-300" />
-                    <Link href={pageData.sewebsitelink.value}>
+                    <Link href={pageData.sewebsitelink.value} target="_blank">
                       <img
                         src={pageData?.selogo?.value?.[0]?.url}
                         alt="Society"
