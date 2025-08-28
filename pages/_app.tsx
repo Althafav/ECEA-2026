@@ -2,6 +2,7 @@ import LayoutComponent from "@/components/Layout/LayoutComponent";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Rubik } from "next/font/google";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -20,6 +21,9 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [locale]);
   return (
     <LayoutComponent>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <div className={rubik.className}>
         <Component {...pageProps} />
       </div>
