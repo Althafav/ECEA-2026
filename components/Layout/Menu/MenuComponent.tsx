@@ -77,8 +77,8 @@ export default function MenuComponent() {
         </div>
 
         {/* Header */}
-        <div className="bg-white py-4 sm:py-5" dir="ltr">
-          <nav className="container mx-auto px-4">
+        <div className="bg-white py-4 sm:py-5" >
+          <nav className="container mx-auto px-4" dir="ltr">
             {/* was: flex flex-col ... */}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               {/* Logos */}
@@ -109,11 +109,12 @@ export default function MenuComponent() {
               <div className="flex items-center gap-2 sm:gap-3 self-end sm:self-auto">
                 <button
                   className="lang-btn text-xs sm:text-sm border border-gray-300 rounded-full text-black px-3 py-1.5"
-                  onClick={() =>
-                    push(asPath, asPath, {
-                      locale: locale === "en" ? "ar" : "en",
-                    })
-                  }
+                  onClick={() => {
+                    const newLocale = locale === "en" ? "ar" : "en";
+                    push(asPath, asPath, { locale: newLocale }).then(() => {
+                      window.location.reload();
+                    });
+                  }}
                 >
                   {locale === "en" ? "العربية" : "English"}
                 </button>
@@ -124,7 +125,7 @@ export default function MenuComponent() {
                   aria-label="Open menu"
                 >
                   <span className="text-sm sm:text-base">Menu</span>
-                  <HiMenuAlt4 size={22} />
+                  <IoMdArrowDropdown size={22} />
                 </button>
               </div>
             </div>
